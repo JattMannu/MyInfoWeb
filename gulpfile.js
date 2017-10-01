@@ -5,6 +5,7 @@ const gulp = require('gulp');
 const LiveServer = require('gulp-live-server');
 const browserSync = require('browser-sync');
 const browserify = require('browserify');
+const babelify = require('babelify');
 const reactify = require('reactify');
 const source = require('vinyl-source-stream');
 
@@ -14,7 +15,7 @@ gulp.task('live-server', function(){
     server.start();
 });
 
-gulp.task('serve' , ['live-server' ], function(){
+gulp.task('serve' , ['bundle', 'live-server'], function(){
     browserSync.init(null , {
         proxy : 'http://localhost:9999',
         port:9990
@@ -27,7 +28,7 @@ gulp.task('bundle' , function(){
         entries : 'app/main.jsx',
         debug : true,
     })
-    .transform(reactify)
+    .transform(babelify, {presets: ["es2015", "react"]})//.transform(reactify)
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./.tmp'));

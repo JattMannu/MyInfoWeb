@@ -1,0 +1,20 @@
+reactify was not working well,
+so reading these comments ,
+https://stackoverflow.com/questions/34162178/gulp-reactify-and-babelify-not-transforming-together
+Reactify should no longer be used. You don't say what version you are on, but as of Babel 6 "preset's" are the standard way to achieve compilation.
+
+Run the following
+
+npm install save-dev babel-preset-react babel-preset-es2015
+You should also make sure Babelify is up to date. Then your Gulp config becomes
+
+var babelify = require("babelify");
+gulp.task('react', function () {
+  browserify('app/src/main.jsx')
+    .transform(babelify, {presets: ["es2015", "react"]})
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(streamify(uglify()))
+    .pipe(gulp.dest('dist/js/'));
+});
+See the options page for more information.
