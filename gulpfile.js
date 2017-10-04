@@ -34,6 +34,8 @@ gulp.task('bundle', function () {
         .pipe(gulp.dest('./.tmp'));
 });
 
+
+//This function copies all css type files from app folder into tmp folder.
 gulp.task('copy', function () {
     gulp.src(['app/*.css'])
         .pipe(gulp.dest('./.tmp'));
