@@ -9,28 +9,32 @@ const babelify = require('babelify');
 const reactify = require('reactify');
 const source = require('vinyl-source-stream');
 
-gulp.task('live-server', function(){
+gulp.task('live-server', function () {
     //This code gets called when live-server is ran via cli
     const server = new LiveServer('./server/main.js');
     server.start();
 });
 
-gulp.task('serve' , ['bundle', 'live-server'], function(){
-    browserSync.init(null , {
-        proxy : 'http://localhost:9999',
-        port:9990
+gulp.task('serve', ['bundle', 'live-server', 'copy'], function () {
+    browserSync.init(null, {
+        proxy: 'http://localhost:9999',
+        port: 9990
     });
 });
 
 //This function convert a JSX into a JS
-gulp.task('bundle' , function(){
+gulp.task('bundle', function () {
     return browserify({
-        entries : 'app/main.jsx',
-        debug : true,
+        entries: 'app/main.jsx',
+        debug: true,
     })
-    .transform(babelify, {presets: ["es2015", "react"]})//.transform(reactify)
-    .bundle()
-    .pipe(source('app.js'))
-    .pipe(gulp.dest('./.tmp'));
+        .transform(babelify, { presets: ["es2015", "react"] })//.transform(reactify)
+        .bundle()
+        .pipe(source('app.js'))
+        .pipe(gulp.dest('./.tmp'));
 });
 
+gulp.task('copy', function () {
+    gulp.src(['app/*.css'])
+        .pipe(gulp.dest('./.tmp'));
+});
