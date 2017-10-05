@@ -11,6 +11,61 @@
             flex-flow: row wrap;
             text-align: center;
         }
+
+        .flex-container>* {
+            padding: 15px;
+            -webkit-flex: 1 100%;
+            flex: 1 100%;
+        }
+
+        .article {
+            text-align: left;
+            background: #d5e1df;
+        }
+
+        header {
+            background: #86af49;
+            color: Black;
+        }
+
+        footer {
+            background: #b5e7a0;
+            color: black;
+        }
+
+        .nav {
+            background: #e3eaa7;
+            font-size: 150%
+        }
+
+        .nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .nav ul a {
+            text-decoration: none;
+        }
+
+        @media all and (min-width: 768px) {
+            .nav {
+                text-align: left;
+                -webkit-flex: 1 auto;
+                flex: 1 auto;
+                -webkit-order: 1;
+                order: 1;
+            }
+            .article {
+                -webkit-flex: 5 0px;
+                flex: 5 0px;
+                -webkit-order: 2;
+                order: 2;
+            }
+            footer {
+                -webkit-order: 3;
+                order: 3;
+            }
+        }
     </style>
 </head>
 
@@ -23,10 +78,18 @@
 
     <!-- https://www.w3schools.com/html/tryit.asp?filename=tryhtml_layout_flexbox -->
     <div class='flex-container'>
-        <div id='headerCom'></div>
-        <div id='navCom'></div>
-        <div id='articleCom'></div>
-        <div id='footerCom'></div>
+        <header>
+            <div id='headerCom'></div>
+        </header>
+        <nav class="nav">
+            <div id='navCom'></div>
+        </nav>
+        <article class="article">
+            <div id='articleCom'></div>
+        </article>
+        <footer>
+            <div id='footerCom'></div>
+        </footer>
     </div>
     <script src='app.js'></script>
 </body>
