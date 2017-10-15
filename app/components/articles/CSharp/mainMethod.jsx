@@ -25,7 +25,7 @@ class mainMethod extends React.Component {
                         <li>Main must be static and it need not be public.</li>
                         <li>Main can either have a void, int, or, starting with C# 7.1, Task, or Task&#60;int&#62; return type.</li>
                         <li>If and only if Main returns a Task or Task&#60;int&#62;, the declaration of Main may include the async modifier.</li>
-                        <li></li>
+                        <li> sample 3</li>
                     </ol>
                 </p>
 

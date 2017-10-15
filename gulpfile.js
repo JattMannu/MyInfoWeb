@@ -2,6 +2,7 @@
 //npm install --save gulp gulp-live-server
 
 const gulp = require('gulp');
+const watch = require('gulp-watch');
 const LiveServer = require('gulp-live-server');
 const browserSync = require('browser-sync');
 const browserify = require('browserify');
@@ -41,4 +42,11 @@ gulp.task('copy', function () {
         .pipe(gulp.dest('./.tmp'));
 });
 
+
+gulp.task('gw', function () {
+    watch('./app', function (file) {
+        //console.dir(file);
+        gulp.start('bundle');
+    });
+});
 
