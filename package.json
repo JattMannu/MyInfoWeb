@@ -19,6 +19,7 @@
     "gulp": "^3.9.1",
     "gulp-live-server": "0.0.31",
     "gulp-watch": "^4.3.11",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-highlight": "^0.10.0",
