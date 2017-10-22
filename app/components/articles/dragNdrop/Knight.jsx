@@ -4,7 +4,9 @@ export default class Knight extends Component {
 
     render() {
         return (
-            <span>
+            <span style={{
+                fontSize: '100px', //Make the size of the horse larger.
+            }}>
                 ♘
             </span>
         );
