@@ -26,7 +26,8 @@ function collect(connect, monitor) {
     //See render function.
     return {
         connectDropTarget: connect.dropTarget(),
-        isOver: monitor.isOver()
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop()
     };
 }
 
@@ -34,10 +35,26 @@ function collect(connect, monitor) {
 //We must have X and Y, We will use Propstype to ensure they are added to this file.
 class BoardSquare extends React.Component {
 
+    renderOverlay(color) {
+        return (
+            //This is interesting, opacity is useful for keeping the background there, opacity can be use for highlight.
+            <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                height: '100%',
+                width: '100%',
+                zIndex: 1,
+                opacity: 0.5,
+                backgroundColor: color,
+            }} />
+        );
+    }
+
     //Must have this function in a react component.
     render() {
         //We must have x and y from props.
-        const { x, y, connectDropTarget, isOver } = this.props;
+        const { x, y, connectDropTarget, isOver, canDrop } = this.props;
         //We must pass variable black to the Square.Jsx
         const black = (x + y) % 2 === 1;
         console.log(`isOver : ${isOver}`);
@@ -53,19 +70,9 @@ class BoardSquare extends React.Component {
                         //This is the Knight been passed down.
                     }
                 </Square>
-                {isOver &&
-                    //This is interesting, opacity is useful for keeping the background there, opacity can be use for highlight.
-                    <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        height: '100%',
-                        width: '100%',
-                        zIndex: 1,
-                        opacity: 0.5,
-                        backgroundColor: 'yellow',
-                    }} />
-                }
+                {isOver && canDrop && this.renderOverlay('yellow')}
+                {isOver && !canDrop && this.renderOverlay('red')}
+                {!isOver && canDrop && this.renderOverlay('green')}
             </div>
         );
 
